@@ -1,0 +1,11 @@
+<th class="left-col light">
+	<strong><%= parameter.get("name") %></strong> 
+	<% if(parameter.get("type") === "optional") { %>
+	    <small class="label label-info"><%= parameter.get("type") %></small>
+	<% } else { %>
+	    <small class="label label-important"><%= parameter.get("type") %></small>
+	<% } %>
+</th>
+<th class="right-col light">
+	<%= parameter.get("description") %>
+</th>

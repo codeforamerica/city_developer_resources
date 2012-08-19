@@ -1,0 +1,25 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+table caption {
+	font-weight: lighter;
+	text-align: left;
+	margin-bottom: 8px;
+}
+
+table tr {
+	font-weight: lighter;
+}
+
+table .light {
+	font-weight: lighter;
+}
+
+.parameters .left-col {
+	width: 30%;
+}
+.parameters .right-col {	
+	width: 70%;
+}

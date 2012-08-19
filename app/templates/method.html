@@ -1,0 +1,51 @@
+<div class="row span12">
+  <div class="span7">
+  	<h1 class="lead"><%= model.get("type") %> <%= model.get("url") %></h1>
+	<p><%= model.get("description") %><p>
+	<h4>Parameters</h4>
+	<table class="table method-parameters">
+		<!-- parameter html is injected here -->
+	</table>
+  </div>
+  <div class="span4">
+  	<div class="well">
+  		<table class="table">
+	  		<h4>Resource Information</h4><br />
+	  		<tr>
+	  			<td>
+	  				<p>Requires Authentication?</p>
+	  			</td>
+	  			<td>
+	  				<p><strong><%= model.get("requiresAuthentication") %></strong></p>
+	  			</td>
+	  	    </tr>
+	  	    <tr>
+	  	    	<td>
+	  	    		<p>Response Formats</p>
+	  	    	</td>
+	  	    	<td>
+	  	    		<p><strong><%= model.get("responseFormats") %></strong></p>
+	  	    	</td>
+	  	    </tr>
+	  	    <tr>
+	  	    	<td>
+		    		<p>Response Formats</p>
+		    	</td>
+		    	<td>
+		    		<p><strong><%= model.get("httpMethods") %></strong></p> 
+		    	</td>  		
+	  	    </tr>
+	  	    <tr>
+	  	    	<td>
+	  	    		<p>Response Object</p>
+	  	    	</td>  	    	
+	  	    	<td>
+	  	    		<p><strong><a href=<%= model.get("link") %>/response>
+	  	    			<%= model.get("responseObject") %></a></strong>
+	  	    		</p>
+	  	    	</td>  		
+	  	    </tr>
+  	    </table>
+    </div>
+  </div>	
+</div>
