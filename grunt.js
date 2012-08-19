@@ -108,9 +108,15 @@ module.exports = function(grunt) {
       // Ensure the favicon is mapped correctly.
       files: { "favicon.ico": "favicon.ico" },
 
+      host: "0.0.0.0",
+      port: process.env.PORT || 8000,      
+
       debug: {
         // Ensure the favicon is mapped correctly.
         files: { "favicon.ico": "favicon.ico" },
+
+        host: "0.0.0.0",
+        port: process.env.PORT || 8000,        
 
         // Map `server:debug` to `debug` folders.
         folders: {
@@ -122,6 +128,7 @@ module.exports = function(grunt) {
       release: {
         // This makes it easier for deploying, by defaulting to any IP.
         host: "0.0.0.0",
+        port: process.env.PORT || 8000,        
 
         // Ensure the favicon is mapped correctly.
         files: { "favicon.ico": "favicon.ico" },
