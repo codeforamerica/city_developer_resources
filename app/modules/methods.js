@@ -106,6 +106,8 @@ function(app) {
     },
 
     _handleTryApiClick: function(e) {      
+      $("#response-body").text("loading...");
+      
       var methodUrl = this.model.get("endpointBaseUrl") + 
         this.model.get("link") + "." + $("#response-format-value").html() + "?callback=?";
 

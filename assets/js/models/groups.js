@@ -17,7 +17,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		new Methods.Parameter({
   			name: "jurisdiction_id",
   			type: "optional",
-  			description: "This is only required if the endpoint serves multiple jurisdictions.",
+  			description: "This is currently optional on Chicago's Open311 endpoint.",
   			example: "cityofchicago.org"
   		})
   	]),
@@ -73,7 +73,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		new Methods.Parameter({
   			name: "jurisdiction_id",
   			type: "optional",
-  			description: "This is only required if the endpoint serves multiple jurisdictions.",
+  			description: "This is currently optional on Chicago's Open311 endpoint.",
   			example: "cityofchicago.org"
   		}),
   		new Methods.Parameter({
@@ -115,13 +115,13 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		new Methods.Parameter({
   			name: "jurisdiction_id",
   			type: "optional",
-  			description: "This is only required if the endpoint serves multiple jurisdictions.",
+  			description: "This is currently optional on Chicago's Open311 endpoint.",
   			example: "cityofchicago.org"
   		}),
   		new Methods.Parameter({
-  			name: "service_code",
+  			name: "service_request_id",
   			type: "required",
-  			description: "The service_code is specified in the main URL path rather than an added query string parameter.",
+  			description: "The id of the individual service request you want to look up. The service_request_id is specified in the main URL path rather than an added query string parameter.",
   			example: "033"
   		})  		
   	])  	
@@ -138,31 +138,37 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		new Methods.Parameter({
   			name: "jurisdiction_id",
   			type: "optional",
-  			description: "To call multiple Service Requests at once, multiple service_request_id can be declared; comma delimited. This overrides all other arguments.",
+  			description: "This is currently optional on Chicago's Open311 endpoint.",
   			example: "cityofchicago.org"
   		}),
   		new Methods.Parameter({
+  			name: "service_request_id",
+  			type: "optional",
+  			description: "To call multiple Service Requests at once, multiple service_request_id can be declared; comma delimited.",
+  			example: "cityofchicago.org"
+  		}),  		
+  		new Methods.Parameter({
   			name: "service_code",
   			type: "optional",
-  			description: "Specify the service type by calling the unique ID of the service_code. This defaults to all service codes when not declared; can be declared multiple times, comma delimited.",
+  			description: "Specify the service type by calling the unique ID(s) of the service_codes you wish to query. This defaults to all service codes when not declared; can be declared multiple times, comma delimited (no spaces)",
   			example: "cityofchicago.org"
   		}),
   		new Methods.Parameter({
   			name: "start_date",
   			type: "optional",
-  			description: "Earliest datetime to include in search. When provided with end_date, allows one to search for requests which have a requested_datetime that matches a given range, but may not span more than 90 days. When not specified, the range defaults to most recent 90 days. Must use w3 format, eg 2010-01-01T00:00:00Z.",
+  			description: "Earliest datetime to include in search. When provided with end_date, allows one to search for requests which have a requested_datetime that matches a given range. Must use w3 format, eg 2010-01-01T00:00:00Z.",
   			example: "cityofchicago.org"
   		}),
   		new Methods.Parameter({
   			name: "end_date",
   			type: "optional",
-  			description: "Latest datetime to include in search. When provided with start_date, allows one to search for requests which have a requested_datetime that matches a given range, but may not span more than 90 days. When not specified, the range defaults to most recent 90 days. Must use w3 format, eg 2010-01-01T00:00:00Z.",
+  			description: "Latest datetime to include in search. When provided with start_date, allows one to search for requests which have a requested_datetime that matches a given range. Must use w3 format, eg 2010-01-01T00:00:00Z.",
   			example: "cityofchicago.org"
   		}),
   		new Methods.Parameter({
   			name: "status",
   			type: "optional",
-  			description: "Allows one to search for requests which have a specific status. This defaults to all statuses; can be declared multiple times, comma delimited; Options: open, closed.",
+  			description: "Allows one to search for requests which have a specific status. This defaults to all statuses; can be declared multiple times, comma delimited (no spaces); Options: open, closed.",
   			example: "cityofchicago.org"
   		}),    		 		  		 		  		
   	])  	

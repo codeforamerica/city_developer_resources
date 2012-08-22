@@ -1,5 +1,7 @@
 <th class="left-col light">
+	<p>
 	<%= parameter.get("name") %>
+    </p>
 	<% if(parameter.get("type") === "optional") { %>
 	    <small class="label label-info"><%= parameter.get("type") %></small>
 	<% } else { %>
