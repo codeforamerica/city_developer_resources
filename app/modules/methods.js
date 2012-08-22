@@ -107,7 +107,7 @@ function(app) {
 
     _handleTryApiClick: function(e) {      
       var methodUrl = this.model.get("endpointBaseUrl") + 
-        this.model.get("link") + "." + $("#response-format-value").html() + "?callback=?"
+        this.model.get("link") + "." + $("#response-format-value").html() + "?callback=?";
 
       $.getJSON(methodUrl, function(data) {
         $("#response-body").text(JSON.stringify(data, undefined, 1));
@@ -170,7 +170,7 @@ function(app) {
         "io-form": new Methods.Views.IOView({
           model: this.model
         })
-      }
+      };
 
       var parameters = this.model.get("parameters");
 
