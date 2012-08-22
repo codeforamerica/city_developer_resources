@@ -7,11 +7,12 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   var getServiceList = new Methods.Method({
   	description: "Provide a list of acceptable 311 service request types and their associated service codes.",
   	url: "services.:format",
-  	link: "service_list",
+  	link: "services",
   	requiresAuthentication: "No",
   	responseFormats: "JSON, XML",
   	httpMethods: "GET",
   	responseObject: "Service List",
+  	endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/",
   	parameters: new Methods.MethodParameterCollection([
   		new Methods.Parameter({
   			name: "jurisdiction_id",
@@ -19,6 +20,45 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   			description: "This is only required if the endpoint serves multiple jurisdictions.",
   			example: "cityofchicago.org"
   		})
+  	]),
+  	responseParameters: new Methods.MethodResponseParameterCollection([
+  		new Methods.ResponseParameter({
+  			name: "service_code",
+  			custom: false,
+  			description: "The unique identifier for the service request type"
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "service_name",
+  			custom: false,
+  			description: "The human readable name of the service request type"
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "description",
+  			custom: false,
+  			description: "A brief description of the service request type."
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "metadata",
+  			custom: false,
+  			description: "Determines whether there are additional form fields for this service type."
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "type",
+  			custom: false,
+  			description: "Explains how this deals with the Open311 service request ID dance."
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "keywords",
+  			custom: false,
+  			description: "A comma separated list of tags or keywords to help users identify the request type. " +
+  			             "This can provide synonyms of the service_name and group."
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "group",
+  			custom: false,
+  			description: "A category to group this service type within. This provides a way to group " +
+  			             "several service request types under one category such as 'sanitation'"
+  		}),  		  	  			
   	])
   });
   var getServiceDefinition = new Methods.Method({
@@ -58,7 +98,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   });
 
   // add meta data methods to dict
-  methodsDict["service_list"] = getServiceList;
+  methodsDict["services"] = getServiceList;
   methodsDict["service_definition"] = getServiceDefinition;
 
 

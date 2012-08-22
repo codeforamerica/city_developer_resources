@@ -1,6 +1,9 @@
 define([
   // Application.
-  "app"
+  "app",
+
+  // Libraries.
+  "bootstrap"  
 ],
 
 // Map dependencies from above array.
@@ -33,13 +36,21 @@ function(app) {
     model: Methods.MethodGroup
   });
 
-  // Holds method parameters.
+  // Holds method parameter.
   Methods.Parameter = Backbone.Model.extend({});
+
+  // Holds method response parameters.
+  Methods.ResponseParameter = Backbone.Model.extend({});  
 
   // Holds method parameters.
   Methods.MethodParameterCollection = Backbone.Collection.extend({
     model: Methods.Parameter
   });   
+
+  // Holds method response parameters.
+  Methods.MethodResponseParameterCollection = Backbone.Collection.extend({
+    model: Methods.ResponseParameter
+  });     
 
   Methods.Views.ParameterView = Backbone.View.extend({
     template: "parameter",
@@ -53,6 +64,70 @@ function(app) {
     }       
   });
 
+  Methods.Views.ResponseParameterView = Backbone.View.extend({
+    template: "response-parameter",
+
+    tagName: "tr",
+
+    serialize: function() {
+      return {
+        parameter: this.model
+      };
+    }       
+  });  
+
+  // View for holding method response parameters
+  Methods.Views.ResponseParamsView = Backbone.View.extend({
+    template: "response-params",
+
+    beforeRender: function() {
+      this.collection.each(function(responseParameter) {
+        var view = new Methods.Views.ResponseParameterView({
+          model: responseParameter
+        });
+        this.insertView(".method-parameters", view);
+      }, this);
+    }
+  });
+
+  // View for holding method IO doc style try
+  Methods.Views.IOView = Backbone.View.extend({
+    template: "io-form",
+
+    serialize: function() {
+      return { 
+        model: this.model
+      };
+    },
+
+    events: {
+      "change #response-format": "_updateResponseFormat",
+      "click #try-api-button": "_handleTryApiClick"
+    },
+
+    _handleTryApiClick: function(e) {      
+      var methodUrl = this.model.get("endpointBaseUrl") + 
+        this.model.get("link") + "." + $("#response-format-value").html() + "?callback=?"
+
+      $.getJSON(methodUrl, function(data) {
+        $("#response-body").text(JSON.stringify(data, undefined, 1));
+      });
+    },
+
+    _updateResponseFormat: function(e) {
+      responseFormat = $("#response-format").val();
+
+      if ("xml" === responseFormat) { alert("WARNING: testing with xml responses is not supported yet"); }
+
+      $("#response-format-value").html($("#response-format").val());
+      $("#response-format-value").animate({          
+        fontSize: "120%"
+      }, 100, function() {
+        $(this).animate({fontSize: "100%"}, 100);
+      });        
+    }      
+  });  
+
   // View for method.
   Methods.Views.MethodView = Backbone.View.extend({
     template: "method",
@@ -61,17 +136,55 @@ function(app) {
       return { 
         model: this.model
       };
+    },    
+
+    events: {
+      "click .expand-click": "_expand"
+    },
+
+    _expand: function(e) {
+      var target = $(e.currentTarget).parent();
+      target.children("i").toggleClass("icon-minus");
+
+      // the div will hold an id that matches the name of the form we want to insert
+      var childViewName = target.children(".expanda").attr("id");
+      var expandaViews = this._expandViews;
+
+      // if the icon is a minus, we show the view, otherwise we remove view
+      var showView = target.children("i").hasClass("icon-minus");
+      if (showView) {
+        this.setView("#" + childViewName, expandaViews[childViewName]).render();
+        return;
+      }
+      var view = this.getView(function(view) {
+        return view === expandaViews[childViewName];
+      }).remove();
     },
 
     beforeRender: function() {
+      // load a utility hash for lookup of expandable views in _expand function, later 
+      this._expandViews = {
+        "response-params": new Methods.Views.ResponseParamsView({
+          collection: this.model.get("responseParameters")
+         }),
+        "io-form": new Methods.Views.IOView({
+          model: this.model
+        })
+      }
+
       var parameters = this.model.get("parameters");
+
       parameters.each(function(parameter) {
         var view = new Methods.Views.ParameterView({
           model: parameter
         });
         this.insertView(".method-parameters", view);
       }, this);      
-    }   
+    },
+
+    afterRender: function() {
+      $("#nav-docs").addClass("active");
+    }      
   });
 
   // View for method.

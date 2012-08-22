@@ -1,0 +1,13 @@
+<th class="left-col light">
+	<p>
+	  <%= parameter.get("name") %>
+    </p>
+	<% if(parameter.get("custom") === true) { %>
+	    <small class="label label-important">custom</small>
+	<% } else { %>
+	    <small class="label label-info">standard</small>
+	<% } %>
+</th>
+<th class="right-col light">
+	<%= parameter.get("description") %>
+</th>

@@ -2,13 +2,23 @@
   <div class="span7">
   	<h1 class="lead"><%= model.get("type") %> <%= model.get("url") %></h1>
 	<p><%= model.get("description") %><p>
-	<h4>Parameters</h4>
+	<strong>Arguments</strong>
 	<table class="table method-parameters">
 		<!-- parameter html is injected here -->
 	</table>
+	<div class="expand-it">		 
+		 <strong>Response Parameters:</strong>
+		 <i class="expand-click icon-plus"></i>
+		<div id="response-params" class="expanda"></div>		 
+	</div><hr />
+	<div class="expand-it">		
+		 <strong>Try it:</strong>
+		 <i class="expand-click icon-plus"></i>
+		<div id="io-form" class="expanda"></div>		 
+	</div>	
   </div>
   <div class="span4">
-  	<div class="well">
+  	<div class="well bs-docs-sidenav affix">
   		<table class="table">
 	  		<h4>Resource Information</h4><br />
 	  		<tr>
@@ -29,7 +39,7 @@
 	  	    </tr>
 	  	    <tr>
 	  	    	<td>
-		    		<p>Response Formats</p>
+		    		<p>HTTP Methods</p>
 		    	</td>
 		    	<td>
 		    		<p><strong><%= model.get("httpMethods") %></strong></p> 

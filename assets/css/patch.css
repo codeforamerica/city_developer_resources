@@ -23,3 +23,26 @@ table .light {
 .parameters .right-col {	
 	width: 70%;
 }
+
+.expand-it {
+	cursor: pointer;
+}
+
+.expanda {
+	margin-top: 10px;
+}
+
+.try-it .title {
+	padding-bottom: 15px;
+}
+
+#response-body {
+	font-size: 10px;
+}
+
+.try-it-params .left-col {
+	width: 5%;
+}
+.try-it-params .right-col {
+	width: 95%;
+}

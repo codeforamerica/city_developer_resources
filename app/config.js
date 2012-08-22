@@ -20,9 +20,11 @@ require.config({
   shim: {
     // Backbone library depends on lodash and jQuery.
     backbone: {
-      deps: ["lodash", "jquery", "bootstrap"],
+      deps: ["lodash", "jquery"],
       exports: "Backbone"
     },
+
+    bootstrap: "../assets/js/libs/bootstrap",
 
     // Backbone.LayoutManager depends on Backbone.
     "plugins/backbone.layoutmanager": ["backbone"]

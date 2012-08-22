@@ -1,0 +1,37 @@
+<div class="try-it well">
+	<div class="title">
+		<strong><%= model.get("type") %> <%= model.get("responseObject") %></strong><br />
+    </div>
+    <table class="table try-it-params">
+	<% for (var i=0; i<model.get("parameters").length; i++) { %>
+	  <% var parameter = model.get("parameters").models[i] %>
+	  <tr>	 		    
+	  	<th class="left-col">
+	  		<%= parameter.get("name")%>:
+	  	</th>
+	  	<th class="right-col">
+	  		<input type="text" class="input-large" placeholder= <%=parameter.get("type")%> >
+	  	</th>
+	  </tr>
+	<% } %>
+	  <tr>
+	  	<th class="left-col">
+	  		format:
+	  	</th>
+	  	<th>
+	  		<select class="span2" id="response-format">	
+	  			<option>json</option>
+	  			<option>xml</option>
+	  		</select>
+	  	</th>
+	  </tr>
+    </table>
+	<button type="submit" class="btn" id="try-api-button">
+		Submit
+	</button>	
+	<hr />
+	<p>Call</p>
+	<pre class="uneditable-input"><%= model.get("endpointBaseUrl") %><%= model.get("link") %>.<span id="response-format-value">json</span></pre>
+    <p>Response Body</p>
+	<pre id="response-body"></pre>
+</div>
