@@ -40,6 +40,10 @@ table .light {
 	font-size: 10px;
 }
 
+.endpoint-url {
+	font-size: 10px;	
+}
+
 .try-it-params .left-col {
 	width: 5%;
 }

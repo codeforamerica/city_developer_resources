@@ -7,10 +7,10 @@
 	  <% var parameter = model.get("parameters").models[i] %>
 	  <tr>	 		    
 	  	<th class="left-col">
-	  		<%= parameter.get("name")%>:
+	  		<%= parameter.get("name")%>
 	  	</th>
 	  	<th class="right-col">
-	  		<input type="text" class="input-large" placeholder= <%=parameter.get("type")%> >
+	  		<input type="text" class="input-large" placeholder=<%=parameter.get("type")%>>
 	  	</th>
 	  </tr>
 	<% } %>
@@ -31,7 +31,7 @@
 	</button>	
 	<hr />
 	<p>Call</p>
-	<pre class="uneditable-input"><%= model.get("endpointBaseUrl") %><%= model.get("link") %>.<span id="response-format-value">json</span></pre>
+	<pre class="endpoint-url"><%= model.get("endpointBaseUrl") %><%= model.get("link") %>.<span id="response-format-value">json</span><span class="param-sep-start"></span><span class="jurisdiction_id"></span></pre>
     <p>Response Body</p>
 	<pre id="response-body"></pre>
 </div>

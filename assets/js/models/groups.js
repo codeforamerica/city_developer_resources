@@ -16,6 +16,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   	parameters: new Methods.MethodParameterCollection([
   		new Methods.Parameter({
   			name: "jurisdiction_id",
+  			id: "jurisdiction_id",
   			type: "optional",
   			description: "This is currently optional on Chicago's Open311 endpoint.",
   			example: "cityofchicago.org"

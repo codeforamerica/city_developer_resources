@@ -102,18 +102,48 @@ function(app) {
 
     events: {
       "change #response-format": "_updateResponseFormat",
-      "click #try-api-button": "_handleTryApiClick"
+      "click #try-api-button": "_handleTryApiClick",
+      "keyup .right-col": "_handleParamInputChange"
+    },
+
+    _handleParamInputChange: function(e) {      
+      $(".param-sep-start").text('?');
+      var fieldName = $(e.currentTarget).parent().children(".left-col").text().trim();
+      var fieldValue = $(e.currentTarget).parent().children(".right-col").children("input").val();      
+      $(".endpoint-url ." + fieldName).text(fieldName + "=" + fieldValue);
+      
+      // update the model with the value set by user in the form
+      var model = this.model.get("parameters").get(fieldName);
+      model.set("value", fieldValue);
     },
 
     _handleTryApiClick: function(e) {      
       $("#response-body").text("loading...");
-      
-      var methodUrl = this.model.get("endpointBaseUrl") + 
-        this.model.get("link") + "." + $("#response-format-value").html() + "?callback=?";
 
+      // var methodUrl = this.model.get("endpointBaseUrl") + 
+      //   this.model.get("link") + "." + $("#response-format-value").html() + "?callback=?";
+
+      var methodUrl = this.model.get("endpointBaseUrl");
+      methodUrl += this.model.get("link") + "." + $("#response-format-value").html();
+      methodUrl += "?callback=?"
+      this.model.get("parameters").each(function(model) {
+        if (model.get("value") !== undefined) {
+          methodUrl += "&" + model.get("id") + "=" + model.get("value");
+        }
+      })
+
+      console.log(methodUrl);
+      var success = false;
       $.getJSON(methodUrl, function(data) {
+        success = true;
         $("#response-body").text(JSON.stringify(data, undefined, 1));
       });
+      // Set a 5-second timeout to check for errors
+      setTimeout(function() {
+        if (!success) {
+          $("#response-body").text("call failed; check parameters or try again later");
+        }
+      }, 5000);
     },
 
     _updateResponseFormat: function(e) {
