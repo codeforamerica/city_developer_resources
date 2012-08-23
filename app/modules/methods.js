@@ -125,12 +125,12 @@ function(app) {
 
       var methodUrl = this.model.get("endpointBaseUrl");
       methodUrl += this.model.get("link") + "." + $("#response-format-value").html();
-      methodUrl += "?callback=?"
+      methodUrl += "?callback=?";
       this.model.get("parameters").each(function(model) {
         if (model.get("value") !== undefined) {
           methodUrl += "&" + model.get("id") + "=" + model.get("value");
         }
-      })
+      });
 
       console.log(methodUrl);
       var success = false;
