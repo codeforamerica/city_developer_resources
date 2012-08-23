@@ -106,33 +106,43 @@ function(app) {
       "keyup .right-col": "_handleParamInputChange"
     },
 
-    _handleParamInputChange: function(e) {      
-      $(".param-sep-start").text('?');
+    _handleParamInputChange: function(e) {        
       var fieldName = $(e.currentTarget).parent().children(".left-col").text().trim();
-      var fieldValue = $(e.currentTarget).parent().children(".right-col").children("input").val();      
-      $(".endpoint-url ." + fieldName).text(fieldName + "=" + fieldValue);
-      
+      var fieldValue = $(e.currentTarget).parent().children(".right-col").children("input").val();  
+
       // update the model with the value set by user in the form
       var model = this.model.get("parameters").get(fieldName);
       model.set("value", fieldValue);
+
+      // update the view (technically, this should be done via model field change listener) 
+      
+      // if the field being changed is not a param, handle as special case:
+      if (fieldName === "service_code") {
+        $(".endpoint-url ." + fieldName).text(fieldValue);
+        return;
+      }
+
+      $(".endpoint-url ." + fieldName).text(fieldName + "=" + fieldValue);
+      $(".param-sep-start").text('?');    
     },
 
     _handleTryApiClick: function(e) {      
       $("#response-body").text("loading...");
 
-      // var methodUrl = this.model.get("endpointBaseUrl") + 
-      //   this.model.get("link") + "." + $("#response-format-value").html() + "?callback=?";
+      // var methodUrl = this.model.get("endpointBaseUrl");
+      // methodUrl += "." + $("#response-format-value").html();
+      // methodUrl += "?callback=?";
+      // this.model.get("parameters").each(function(model) {
+      //   if (model.get("value") !== undefined) {
+      //     methodUrl += "&" + model.get("id") + "=" + model.get("value");
+      //   }
+      // });
 
-      var methodUrl = this.model.get("endpointBaseUrl");
-      methodUrl += this.model.get("link") + "." + $("#response-format-value").html();
-      methodUrl += "?callback=?";
-      this.model.get("parameters").each(function(model) {
-        if (model.get("value") !== undefined) {
-          methodUrl += "&" + model.get("id") + "=" + model.get("value");
-        }
-      });
-
+      var methodUrl = $(".endpoint-url").text()
+                                        .replace("json", "json?callback=?")
+                                        .replace("??", "?&");
       console.log(methodUrl);
+
       var success = false;
       $.getJSON(methodUrl, function(data) {
         success = true;

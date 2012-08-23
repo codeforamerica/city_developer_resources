@@ -5,15 +5,16 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
 
   // define service meta data methods:
   var getServiceList = new Methods.Method({
+  	name: "Service List",
   	description: "Provide a list of acceptable 311 service request types and their associated service codes.",
   	url: "services.:format",
-  	link: "services",
+  	link: "service_list",
   	requiresAuthentication: "No",
   	responseFormats: "JSON, XML",
   	httpMethods: "GET",
   	responseObject: "Service List",
-  	endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/",
-  	parameters: new Methods.MethodParameterCollection([
+  	endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/services",
+  		parameters: new Methods.MethodParameterCollection([
   		new Methods.Parameter({
   			name: "jurisdiction_id",
   			id: "jurisdiction_id",
@@ -59,10 +60,11 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   			custom: false,
   			description: "A category to group this service type within. This provides a way to group " +
   			             "several service request types under one category such as 'sanitation'"
-  		}),  		  	  			
+  		})  		  	  			
   	])
   });
   var getServiceDefinition = new Methods.Method({
+  	name: "Service Definition",
   	description: "Define attributes associated with a service code.",
   	url: "services/:service_code.:format",
   	link: "service_definition",
@@ -70,20 +72,75 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   	responseFormats: "JSON, XML",
   	httpMethods: "GET",
   	responseObject: "Service Definition",
+  	endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/services/",
   	parameters: new Methods.MethodParameterCollection([
   		new Methods.Parameter({
   			name: "jurisdiction_id",
+  			id: "jurisdiction_id",
   			type: "optional",
   			description: "This is currently optional on Chicago's Open311 endpoint.",
   			example: "cityofchicago.org"
   		}),
   		new Methods.Parameter({
   			name: "service_code",
+  			id: "service_code",
   			type: "required",
   			description: "The service_code is specified in the main URL path rather than an added query string parameter.",
-  			example: "033"
+  			example: "4fd3bd3de750846c530000b9"
   		})  		
-  	])  	
+  	]),
+    responseParameters: new Methods.MethodResponseParameterCollection([
+  		new Methods.ResponseParameter({
+  			name: "service_code",
+  			custom: false,
+  			description: "Returns the service_code associated with the definition, the same one submitted for this call."
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "variable",
+  			custom: false,
+  			description: "'true' denotes that user input is needed. 'false' means the attribute is only used to present information to the user within the description field."
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "code",
+  			custom: false,
+  			description: "A unique identifier for the attribute."
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "datatype",
+  			custom: false,
+  			description: "Denotes the type of field used for user input."
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "required",
+  			custom: false,
+  			description: "'true' means that the value is required to submit service request. 'false' means that the value not required."
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "datatype_description",
+  			custom: false,
+  			description: "A description of the datatype which helps the user provide their input."
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "order",
+  			custom: false,
+  			description: "The sort order that the attributes will be presented to the user. 1 is shown first in the list."
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "description",
+  			custom: false,
+  			description: "A description of the attribute field with instructions for the user to find and identify the requested information."
+  		}),
+  		new Methods.ResponseParameter({
+  			name: "key",
+  			custom: false,
+  			description: "The unique identifier associated with an option for singlevaluelist or multivaluelist. This is analogous to the value attribute in an html option tag."
+  		}),  		  		  		
+  		new Methods.ResponseParameter({
+  			name: "name",
+  			custom: false,
+  			description: "The human readable title of an option for singlevaluelist or multivaluelist. This is analogous to the innerhtml text node of an html option tag."
+  		})  		
+  	])	
   });
 
   // service meta data method collection
@@ -99,7 +156,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   });
 
   // add meta data methods to dict
-  methodsDict["services"] = getServiceList;
+  methodsDict["service_list"] = getServiceList;
   methodsDict["service_definition"] = getServiceDefinition;
 
 
