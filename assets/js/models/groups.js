@@ -185,6 +185,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   	])  	
   });
   var getServiceRequests = new Methods.Method({
+  	name: "Service Requests",
   	description: "Query the current status of multiple requests.",
   	url: "requests.:format",
   	link: "service_requests",
@@ -192,6 +193,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   	responseFormats: "JSON, XML",
   	httpMethods: "GET",
   	responseObject: "Service Request",
+  	endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/requests",
   	parameters: new Methods.MethodParameterCollection([
   		new Methods.Parameter({
   			name: "jurisdiction_id",
@@ -229,7 +231,14 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   			description: "Allows one to search for requests which have a specific status. This defaults to all statuses; can be declared multiple times, comma delimited (no spaces); Options: open, closed.",
   			example: "cityofchicago.org"
   		}),    		 		  		 		  		
-  	])  	
+  	]),
+    responseParameters: new Methods.MethodResponseParameterCollection([
+  		new Methods.ResponseParameter({
+  			name: "test",
+  			custom: false,
+  			description: "just testing."
+  		})
+  	])  	  	
   });  
 
   // define service request method collection
