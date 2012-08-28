@@ -123,26 +123,22 @@ function(app) {
       }
       
       // if it's a param, just update the span text in the html for the given field name
-      $(".endpoint-url ." + fieldName).text(fieldName + "=" + fieldValue);
-      $(".param-sep-start").text('?');    
+      $(".param-sep-start").text('?');
+      $(".endpoint-url ." + fieldName).text(fieldName + "=" + fieldValue);      
+      // only insert '&' character in url string if the param is NOT the last in the params list
+      var currentNode = $(".endpoint-url ." + fieldName)
+      if (currentNode.prev().attr("class") === "param-sep") {
+        currentNode.prev().text("&");
+      }
     },
 
     _handleTryApiClick: function(e) {      
       $("#response-body").text("loading...");
 
-      // var methodUrl = this.model.get("endpointBaseUrl");
-      // methodUrl += "." + $("#response-format-value").html();
-      // methodUrl += "?callback=?";
-      // this.model.get("parameters").each(function(model) {
-      //   if (model.get("value") !== undefined) {
-      //     methodUrl += "&" + model.get("id") + "=" + model.get("value");
-      //   }
-      // });
-
       var methodUrl = $(".endpoint-url").text()
                                         .replace("json", "json?callback=?")
                                         .replace("??", "?&");
-      console.log(methodUrl);
+      //console.log(methodUrl);
 
       var success = false;
       $.getJSON(methodUrl, function(data) {
