@@ -162,6 +162,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
 
   // define service request methods:
   var getServiceRequest = new Methods.Method({
+    name: "Service Request",
   	description: "Query the current status of an individual request.",
   	url: "requests/:service_request_id.:format",
   	link: "service_request",
