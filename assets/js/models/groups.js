@@ -14,7 +14,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   	httpMethods: "GET",
   	responseObject: "Service List",
   	endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/services",
-  		parameters: new Methods.MethodParameterCollection([
+  	parameters: new Methods.MethodParameterCollection([
   		new Methods.Parameter({
   			name: "jurisdiction_id",
   			id: "jurisdiction_id",
@@ -170,19 +170,134 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   	responseFormats: "JSON, XML",
   	httpMethods: "GET",
   	responseObject: "Service Request",
+    endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/requests/",
   	parameters: new Methods.MethodParameterCollection([
   		new Methods.Parameter({
   			name: "jurisdiction_id",
+        id: "jurisdiction_id",
   			type: "optional",
   			description: "This is currently optional on Chicago's Open311 endpoint.",
   			example: "cityofchicago.org"
   		}),
   		new Methods.Parameter({
   			name: "service_request_id",
+        id: "service_request_id",
   			type: "required",
   			description: "The id of the individual service request you want to look up. The service_request_id is specified in the main URL path rather than an added query string parameter.",
-  			example: "033"
-  		})  		
+  			example: "12-1245432"
+  		}),
+      new Methods.Parameter({
+        name: "status",
+        id: "status",
+        type: "optional",
+        description: "The current status of the service request.",
+        example: "open"
+      }),
+      new Methods.Parameter({
+        name: "status_notes",
+        id: "status_notes",
+        type: "optional",
+        description: "Explanation of why status was changed to current state or more details on current status than conveyed with status alone.",
+        example: "The issue was closed after crew fixed it."
+      }),
+      new Methods.Parameter({
+        name: "service_name",
+        id: "service_name",
+        type: "optional",
+        description: "The human readable name of the service request type.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "service_code",
+        id: "service_code",
+        type: "optional",
+        description: "The unique identifier for the service request type.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "description",
+        id: "description",
+        type: "optional",
+        description: "A full description of the request or report submitted.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "agency_responsible",
+        id: "agency_responsible",
+        type: "optional",
+        description: "The agency responsible for fulfilling or otherwise addressing the service request.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "service_notice",
+        id: "service_notice",
+        type: "optional",
+        description: "Information about the action expected to fulfill the request or otherwise address the information reported.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "requested_datetime",
+        id: "requested_datetime",
+        type: "optional",
+        description: "The date and time when the service request was made.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "updated_datetime",
+        id: "updated_datetime",
+        type: "optional",
+        description: "The date and time when the service request was last modified. For requests with status=closed, this will be the date the request was closed.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "expected_datetime",
+        id: "expected_datetime",
+        type: "optional",
+        description: "The date and time when the service request can be expected to be fulfilled. This may be based on a service-specific service level agreement.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "address",
+        id: "address",
+        type: "optional",
+        description: "Human readable address or description of location.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "address_id",
+        id: "address_id",
+        type: "optional",
+        description: "The internal address ID used by a jurisdictions master address repository or other addressing system.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "zipcode",
+        id: "zipcode",
+        type: "optional",
+        description: "The postal code for the location of the service request.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "lat",
+        id: "lat",
+        type: "optional",
+        description: "latitude using the (WGS84) projection.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "long",
+        id: "long",
+        type: "optional",
+        description: "longitude using the (WGS84) projection.",
+        example: ""
+      }),
+      new Methods.Parameter({
+        name: "media_url",
+        id: "media_url",
+        type: "optional",
+        description: "A URL to media associated with the request, eg an image.",
+        example: ""
+      })
   	])  	
   });
   var getServiceRequests = new Methods.Method({

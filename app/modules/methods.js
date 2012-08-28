@@ -117,11 +117,12 @@ function(app) {
       // update the view (technically, this should be done via model field change listener) 
       
       // if the field being changed is not a param, handle as special case:
-      if (fieldName === "service_code") {
+      if (fieldName === "service_code" || fieldName === "service_request_id") {
         $(".endpoint-url ." + fieldName).text(fieldValue);
         return;
       }
-
+      
+      // if it's a param, just update the span text in the html for the given field name
       $(".endpoint-url ." + fieldName).text(fieldName + "=" + fieldValue);
       $(".param-sep-start").text('?');    
     },
