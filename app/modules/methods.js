@@ -131,13 +131,14 @@ function(app) {
         return;
       }
 
+      var currentNode;
       // special case for service_code_param - since the official API specifies it
       // in one case as a param and in another as part of the URI itself:
       if (fieldName === "service_code_param") {
         $(".param-sep-start").text('?');
         $(".endpoint-url ." + fieldName).text("service_code" + "=" + fieldValue);
         // only insert '&' character in url string if the param is NOT the last in the params list
-        var currentNode = $(".endpoint-url ." + fieldName)
+        currentNode = $(".endpoint-url ." + fieldName);
         if (currentNode.prev().attr("class") === "param-sep") {
           currentNode.prev().text("&");
         }        
@@ -148,7 +149,7 @@ function(app) {
       $(".param-sep-start").text('?');
       $(".endpoint-url ." + fieldName).text(fieldName + "=" + fieldValue);      
       // only insert '&' character in url string if the param is NOT the last in the params list
-      var currentNode = $(".endpoint-url ." + fieldName)
+      currentNode = $(".endpoint-url ." + fieldName);
       if (currentNode.prev().attr("class") === "param-sep") {
         currentNode.prev().text("&");
       }
