@@ -103,45 +103,64 @@ function(app) {
     events: {
       "change #response-format": "_updateResponseFormat",
       "click #try-api-button": "_handleTryApiClick",
+      "click #reset-api-button": "_handleResetApiClick",
       "keyup .right-col": "_handleParamInputChange"
     },
 
+    _handleResetApiClick: function(e) {
+      // XXX: implement me
+    },
+
     _handleParamInputChange: function(e) {        
-      var fieldName = $(e.currentTarget).parent().children(".left-col").text().trim();
-      var fieldValue = $(e.currentTarget).parent().children(".right-col").children("input").val();  
+      var fieldName = $(e.currentTarget).parent().children(".left-col").attr("class").replace("left-col", "").trim();
+      var fieldValue = $(e.currentTarget).parent().children(".right-col").children("input").val();
+
+      if (fieldValue === "") {
+        return;
+      }  
 
       // update the model with the value set by user in the form
       var model = this.model.get("parameters").get(fieldName);
       model.set("value", fieldValue);
 
-      // update the view (technically, this should be done via model field change listener) 
+      // XXX: update the view (technically, this should be done via model field change listener) 
       
       // if the field being changed is not a param, handle as special case:
-      if (fieldName === "service_code") {
-        $(".endpoint-url ." + fieldName).text(fieldValue);
+      if (fieldName === "service_code" || fieldName === "service_request_id") {
+        $(".endpoint-url ." + fieldName).text("/" + fieldValue);
         return;
       }
 
-      $(".endpoint-url ." + fieldName).text(fieldName + "=" + fieldValue);
-      $(".param-sep-start").text('?');    
+      // special case for service_code_param - since the official API specifies it
+      // in one case as a param and in another as part of the URI itself:
+      if (fieldName === "service_code_param") {
+        $(".param-sep-start").text('?');
+        $(".endpoint-url ." + fieldName).text("service_code" + "=" + fieldValue);
+        // only insert '&' character in url string if the param is NOT the last in the params list
+        var currentNode = $(".endpoint-url ." + fieldName)
+        if (currentNode.prev().attr("class") === "param-sep") {
+          currentNode.prev().text("&");
+        }        
+        return;
+      }      
+      
+      // if it's a param, just update the span text in the html for the given field name
+      $(".param-sep-start").text('?');
+      $(".endpoint-url ." + fieldName).text(fieldName + "=" + fieldValue);      
+      // only insert '&' character in url string if the param is NOT the last in the params list
+      var currentNode = $(".endpoint-url ." + fieldName)
+      if (currentNode.prev().attr("class") === "param-sep") {
+        currentNode.prev().text("&");
+      }
     },
 
     _handleTryApiClick: function(e) {      
       $("#response-body").text("loading...");
 
-      // var methodUrl = this.model.get("endpointBaseUrl");
-      // methodUrl += "." + $("#response-format-value").html();
-      // methodUrl += "?callback=?";
-      // this.model.get("parameters").each(function(model) {
-      //   if (model.get("value") !== undefined) {
-      //     methodUrl += "&" + model.get("id") + "=" + model.get("value");
-      //   }
-      // });
-
       var methodUrl = $(".endpoint-url").text()
                                         .replace("json", "json?callback=?")
                                         .replace("??", "?&");
-      console.log(methodUrl);
+      //console.log(methodUrl);
 
       var success = false;
       $.getJSON(methodUrl, function(data) {
