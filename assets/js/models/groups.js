@@ -498,8 +498,49 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
         name: "media_url",
         custom: false,
         description: "A URL to media associated with the request, eg an image."
-      })                        
-
+      }),
+      new Methods.Parameter({
+        name: "extensions",
+        id: "extensions",
+        type: "optional",
+        description: "The Chicago Open311 endpoint provides supplemental details about Service Requests that are in addition to the ones described in the standard specification. These data are nested in the 'extended_attributes' field in the Service Request response. In order to retrieve the new supplemental details, add the query parameter “extensions=true” to any Open 311 api request.",
+        example: "true"
+      }),
+      new Methods.Parameter({
+        name: "page_size",
+        id: "page_size",
+        type: "optional",
+        description: "Controls the maximum amount of results a single call will return. The default value is 50. The maximum value is 500.",
+        example: "50"
+      }),      
+      new Methods.Parameter({
+        name: "page",
+        id: "page",
+        type: "optional",
+        description: "For calls that logically include more records than the page size, the page parameter can be use to page through the results. Use in combination with page_size and with multiple calls to download all data in a logical set of records.",
+        example: "1"
+      }),
+      new Methods.Parameter({
+        name: "updated_before",
+        id: "updated_before",
+        type: "optional",
+        description: "TBD. This field is experimental and documentation is still being compiled",
+        example: "2012-08-30T17:28:09"
+      }),
+      new Methods.Parameter({
+        name: "updated_after",
+        id: "updated_after",
+        type: "optional",
+        description: "TBD. This field is experimental and documentation is still being compiled",
+        example: "2012-08-30T17:28:09"
+      }),
+      new Methods.Parameter({
+        name: "q",
+        id: "q",
+        type: "optional",
+        description: "Query: TBD. This field is experimental and documentation is still being compiled",
+        example: "2012-08-30T17:28:09"
+      })                              
   	])  	  	
   });  
 
