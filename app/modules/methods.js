@@ -111,6 +111,26 @@ function(app) {
       // XXX: implement me
     },
 
+    _insertAmpsInArgs: function() {
+      var allSeperators = $(".endpoint-url").find(".param-sep");
+      var opened = false;
+      for (var i=0; i<allSeperators.length; i++) {
+        var previous = $(allSeperators[i]).prev().text();
+        var next = $(allSeperators[i]).next().text();
+        if (previous !== "" && next !== "") {
+          $(allSeperators[i]).text("&");
+          continue;
+        }
+        if (opened && next !== "") {
+          $(allSeperators[i]).text("&");
+          continue;          
+        }
+        if (previous !== "") {
+          opened = true;
+        }
+      }       
+    },
+
     _handleParamInputChange: function(e) {        
       var fieldName = $(e.currentTarget).parent().children(".left-col").attr("class").replace("left-col", "").trim();
       var fieldValue = $(e.currentTarget).parent().children(".right-col").children("input").val();
@@ -128,31 +148,27 @@ function(app) {
       // if the field being changed is not a param, handle as special case:
       if (fieldName === "service_code" || fieldName === "service_request_id") {
         $(".endpoint-url ." + fieldName).text("/" + fieldValue);
+        this._insertAmpsInArgs();
+
         return;
       }
 
-      var currentNode;
       // special case for service_code_param - since the official API specifies it
       // in one case as a param and in another as part of the URI itself:
       if (fieldName === "service_code_param") {
         $(".param-sep-start").text('?');
         $(".endpoint-url ." + fieldName).text("service_code" + "=" + fieldValue);
-        // only insert '&' character in url string if the param is NOT the last in the params list
-        currentNode = $(".endpoint-url ." + fieldName);
-        if (currentNode.prev().attr("class") === "param-sep") {
-          currentNode.prev().text("&");
-        }        
+        this._insertAmpsInArgs();
+
         return;
       }      
       
       // if it's a param, just update the span text in the html for the given field name
       $(".param-sep-start").text('?');
       $(".endpoint-url ." + fieldName).text(fieldName + "=" + fieldValue);      
-      // only insert '&' character in url string if the param is NOT the last in the params list
-      currentNode = $(".endpoint-url ." + fieldName);
-      if (currentNode.prev().attr("class") === "param-sep") {
-        currentNode.prev().text("&");
-      }
+
+      // insert & between args as required
+      this._insertAmpsInArgs();
     },
 
     _handleTryApiClick: function(e) {      

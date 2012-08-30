@@ -185,7 +185,14 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   			type: "required",
   			description: "The id of the individual service request you want to look up. The service_request_id is specified in the main URL path rather than an added query string parameter.",
   			example: "12-1245432"
-  		})
+  		}),
+      new Methods.Parameter({
+        name: "extensions",
+        id: "extensions",
+        type: "optional",
+        description: "The Chicago Open311 endpoint provides supplemental details about Service Requests that are in addition to the ones described in the standard specification. In order to retrieve the new supplemental details, add the query parameter “extensions=true” to any Open 311 api request.",
+        example: "true"
+      })      
   	]),
     responseParameters: new Methods.MethodResponseParameterCollection([
       new Methods.ResponseParameter({
@@ -332,7 +339,14 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   			type: "optional",
   			description: "Allows for search of requests which have a specific status. This defaults to all statuses; can be declared multiple times, comma delimited (no spaces); Options: open, closed.",
   			example: "cityofchicago.org"
-  		})	 		  		 		  		
+  		}),
+      new Methods.Parameter({
+        name: "extensions",
+        id: "extensions",
+        type: "optional",
+        description: "The Chicago Open311 endpoint provides supplemental details about Service Requests that are in addition to the ones described in the standard specification. In order to retrieve the new supplemental details, add the query parameter “extensions=true” to any Open 311 api request.",
+        example: "true"
+      })            	 		  		 		  		
   	]),
     responseParameters: new Methods.MethodResponseParameterCollection([
       new Methods.ResponseParameter({
