@@ -20,7 +20,7 @@ function(app, Methods, Home) {
   // Defining application router
   var Router = Backbone.Router.extend({
     routes: {
-      "": "index",
+      "": "docs",
       "docs": "docs",
       "docs/api": "api",
       "docs/api/:method_name": "methodName",
@@ -50,9 +50,7 @@ function(app, Methods, Home) {
         ".bcrumb": new Home.Views.BreadcrumbView({
             model: new Home.BreadcrumbModel({
               crumbs: [{"urlFrom": "/",
-                        "titleFrom": "Home"},
-                       {"urlTo": "docs",
-                        "titleTo": "Documentation"}]
+                        "titleFrom": "Documentation"}]
             })
           })
       }).render();
@@ -67,9 +65,7 @@ function(app, Methods, Home) {
         ".header": new Home.Views.Header(),
         ".bcrumb": new Home.Views.BreadcrumbView({
             model: new Home.BreadcrumbModel({
-              crumbs: [{"urlFrom": "/",
-                        "titleFrom": "Home"},
-                       {"urlFrom": "/docs",
+              crumbs: [{"urlFrom": "/docs",
                         "titleFrom": "Documentation"},                        
                        {"urlTo": "api",
                         "titleTo": "Open311 Documentation"}]
@@ -93,9 +89,7 @@ function(app, Methods, Home) {
         ".header": new Home.Views.Header(),
         ".bcrumb": new Home.Views.BreadcrumbView({
             model: new Home.BreadcrumbModel({
-              crumbs: [{"urlFrom": "/",
-                        "titleFrom": "Home"},
-                       {"urlFrom": "/docs",
+              crumbs: [{"urlFrom": "/docs",
                         "titleFrom": "Documentation"},                        
                        {"urlFrom": "/docs/api",
                         "titleFrom": "Open311 Documentation"},

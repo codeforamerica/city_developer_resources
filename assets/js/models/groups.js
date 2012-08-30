@@ -190,9 +190,9 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
         name: "extensions",
         id: "extensions",
         type: "optional",
-        description: "The Chicago Open311 endpoint provides supplemental details about Service Requests that are in addition to the ones described in the standard specification. In order to retrieve the new supplemental details, add the query parameter “extensions=true” to any Open 311 api request.",
+        description: "The Chicago Open311 endpoint provides supplemental details about Service Requests that are in addition to the ones described in the standard specification. These data are nested in the 'extended_attributes' field in the Service Request response. In order to retrieve the new supplemental details, add the query parameter “extensions=true” to any Open 311 api request.",
         example: "true"
-      })      
+      })            
   	]),
     responseParameters: new Methods.MethodResponseParameterCollection([
       new Methods.ResponseParameter({
@@ -247,8 +247,8 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
       }),
       new Methods.Parameter({
         name: "updated_datetime",
-        custom: false,
-        description: "The date and time when the service request was last modified. For requests with status=closed, this will be the date the request was closed."
+        custom: true,
+        description: "TBD: The Chicago implementation uses updated_datetime in a manner that differs from Open311. Documentation is still being compiled."
       }),
       new Methods.Parameter({
         name: "expected_datetime",
@@ -284,7 +284,32 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
         name: "media_url",
         custom: false,
         description: "A URL to media associated with the request, eg an image."
-      })                        
+      }),
+      new Methods.Parameter({
+        name: "channel",
+        custom: true,
+        description: "Nested in extended_attributes field (extended_attributes.channel). Describes the method that the Service Request was input into the 311 system (i.e. phone, web). "
+      }),
+      new Methods.Parameter({
+        name: "ward",
+        custom: true,
+        description: "Nested in extended_attributes field (extended_attributes.ward). The political boundary that the Service Request is located in."
+      }),
+      new Methods.Parameter({
+        name: "police_district",
+        custom: true,
+        description: "Nested in extended_attributes field (extended_attributes.police_district). The police district boundary that the Service Request is located in."
+      }),
+      new Methods.Parameter({
+        name: "duplicate",
+        custom: true,
+        description: "Nested in extended_attributes field (extended_attributes.duplicate). Indicates that this Service Request is a duplicate of a Service Request that is already in the system. This can happen when, for example, the same pothole is reported multiple times. Use in conjuntion with extended_attributes.parent_service_request_id to identify duplicates and their assoicated 'master' (aka parent) Service Request records."
+      }),
+      new Methods.Parameter({
+        name: "parent_service_request_id",
+        custom: true,
+        description: "Nested in extended_attributes field (extended_attributes.parent_service_request_id). When a Service Request is a duplicate, this value shows which Service Request (the parent) it is a duplicate of. Use in conjuntion with extended_attributes.duplicate to identify duplicates and their assoicated 'master' (aka parent) Service Request records."
+      }),                                                           
     ])      	
   });
   var getServiceRequests = new Methods.Method({
@@ -344,9 +369,44 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
         name: "extensions",
         id: "extensions",
         type: "optional",
-        description: "The Chicago Open311 endpoint provides supplemental details about Service Requests that are in addition to the ones described in the standard specification. In order to retrieve the new supplemental details, add the query parameter “extensions=true” to any Open 311 api request.",
+        description: "The Chicago Open311 endpoint provides supplemental details about Service Requests that are in addition to the ones described in the standard specification. These data are nested in the 'extended_attributes' field in the Service Request response. In order to retrieve the new supplemental details, add the query parameter “extensions=true” to any Open 311 api request.",
         example: "true"
-      })            	 		  		 		  		
+      }),
+      new Methods.Parameter({
+        name: "page_size",
+        id: "page_size",
+        type: "optional",
+        description: "Controls the maximum amount of results a single call will return. The default value is 50. The maximum value is 500.",
+        example: "50"
+      }),      
+      new Methods.Parameter({
+        name: "page",
+        id: "page",
+        type: "optional",
+        description: "For calls that logically include more records than the page size, the page parameter can be use to page through the results. Use in combination with page_size and with multiple calls to download all data in a logical set of records.",
+        example: "1"
+      }),
+      new Methods.Parameter({
+        name: "updated_before",
+        id: "updated_before",
+        type: "optional",
+        description: "TBD. This field is experimental and documentation is still being compiled",
+        example: "2012-08-30T17:28:09"
+      }),
+      new Methods.Parameter({
+        name: "updated_after",
+        id: "updated_after",
+        type: "optional",
+        description: "TBD. This field is experimental and documentation is still being compiled",
+        example: "2012-08-30T17:28:09"
+      }),
+      new Methods.Parameter({
+        name: "q",
+        id: "q",
+        type: "optional",
+        description: "Query: TBD. This field is experimental and documentation is still being compiled",
+        example: "2012-08-30T17:28:09"
+      })                                          	 		  		 		  		
   	]),
     responseParameters: new Methods.MethodResponseParameterCollection([
       new Methods.ResponseParameter({
@@ -401,8 +461,8 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
       }),
       new Methods.Parameter({
         name: "updated_datetime",
-        custom: false,
-        description: "The date and time when the service request was last modified. For requests with status=closed, this will be the date the request was closed."
+        custom: true,
+        description: "TBD: The Chicago implementation uses updated_datetime in a manner that differs from Open311. Documentation is still being compiled."
       }),
       new Methods.Parameter({
         name: "expected_datetime",

@@ -144,6 +144,7 @@ function(app) {
       model.set("value", fieldValue);
 
       // XXX: update the view (technically, this should be done via model field change listener) 
+      //      here we are just reacting to form input directly, the model has no idea
       
       // if the field being changed is not a param, handle as special case:
       if (fieldName === "service_code" || fieldName === "service_request_id") {
