@@ -309,7 +309,37 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
         name: "parent_service_request_id",
         custom: true,
         description: "Nested in extended_attributes field (extended_attributes.parent_service_request_id). When a Service Request is a duplicate, this value shows which Service Request (the parent) it is a duplicate of. Use in conjuntion with extended_attributes.duplicate to identify duplicates and their assoicated 'master' (aka parent) Service Request records."
-      })                                                           
+      }),
+      new Methods.Parameter({
+        name: "notes",
+        custom: true,
+        description: "This fields holds nested and related status details, activities, follow-on case details, for the Service Request. Will generally have a Request Opened activity and a Request closed activity when the request is closed. May also hold other activity types (i.e. Dispatch Work Crew) and notes about Follow-on Service Requests (usually transfer of Service Request ownership from one department to another). Each actiivty in the array of 1 or more activities can have additional properties that are described below."
+      }),
+      new Methods.Parameter({
+        name: "notes.summary",
+        custom: true,
+        description: "Short description of the activity / action described by the note."
+      }),
+      new Methods.Parameter({
+        name: "notes.type",
+        custom: true,
+        description: "Category of the activity / action described by the note (i.e activity / opened / closed)."
+      }),
+      new Methods.Parameter({
+        name: "notes.description",
+        custom: true,
+        description: "More detailed description of the activity / action described by the note - usually comes directly from City systems so can be a bit cryptic."
+      }),
+      new Methods.Parameter({
+        name: "notes.extended_attributes",
+        custom: true,
+        description: "For activities that are actual Follow-on (child) Service Requests, this field holds important information about those child service requests. Specifically, you will find service_name, agency_responsible, and service_request_id of the child SR."
+      }),
+      new Methods.Parameter({
+        name: "notes.datetime",
+        custom: true,
+        description: "The date and time of the activity / action described by the note."
+      })                                                                                        
     ])      	
   });
   var getServiceRequests = new Methods.Method({
@@ -523,7 +553,37 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
         name: "parent_service_request_id",
         custom: true,
         description: "Nested in extended_attributes field (extended_attributes.parent_service_request_id). When a Service Request is a duplicate, this value shows which Service Request (the parent) it is a duplicate of. Use in conjuntion with extended_attributes.duplicate to identify duplicates and their assoicated 'master' (aka parent) Service Request records."
-      })                             
+      }),
+      new Methods.Parameter({
+        name: "notes",
+        custom: true,
+        description: "This fields holds nested and related status details, activities, follow-on case details, for the Service Request. Will generally have a Request Opened activity and a Request closed activity when the request is closed. May also hold other activity types (i.e. Dispatch Work Crew) and notes about Follow-on Service Requests (usually transfer of Service Request ownership from one department to another). Each actiivty in the array of 1 or more activities can have additional properties that are described below."
+      }),
+      new Methods.Parameter({
+        name: "notes.summary",
+        custom: true,
+        description: "Short description of the activity / action described by the note."
+      }),
+      new Methods.Parameter({
+        name: "notes.type",
+        custom: true,
+        description: "Category of the activity / action described by the note (i.e activity / opened / closed)."
+      }),
+      new Methods.Parameter({
+        name: "notes.description",
+        custom: true,
+        description: "More detailed description of the activity / action described by the note - usually comes directly from City systems so can be a bit cryptic."
+      }),
+      new Methods.Parameter({
+        name: "notes.extended_attributes",
+        custom: true,
+        description: "For activities that are actual Follow-on (child) Service Requests, this field holds important information about those child service requests. Specifically, you will find service_name, agency_responsible, and service_request_id of the child SR."
+      }),
+      new Methods.Parameter({
+        name: "notes.datetime",
+        custom: true,
+        description: "The date and time of the activity / action described by the note."
+      })                                
   	])  	  	
   });  
 
