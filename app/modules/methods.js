@@ -223,14 +223,15 @@ function(app) {
 
     _expand: function(e) {
       var target = $(e.currentTarget).parent();
-      target.children("i").toggleClass("icon-minus");
+      var expandIcon = $(e.currentTarget).find(".icon-plus, .icon-minus");
+      expandIcon.toggleClass("icon-minus");
 
       // the div will hold an id that matches the name of the form we want to insert
       var childViewName = target.children(".expanda").attr("id");
       var expandaViews = this._expandViews;
 
       // if the icon is a minus, we show the view, otherwise we remove view
-      var showView = target.children("i").hasClass("icon-minus");
+      var showView = expandIcon.hasClass("icon-minus");
       if (showView) {
         this.setView("#" + childViewName, expandaViews[childViewName]).render();
         return;
