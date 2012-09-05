@@ -17,6 +17,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   	parameters: new Methods.MethodParameterCollection([
   		new Methods.Parameter({
   			name: "jurisdiction_id",
+  			custom: false,
   			id: "jurisdiction_id",
   			type: "optional",
   			description: "This is currently optional on Chicago's Open311 endpoint.",
@@ -76,6 +77,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   	parameters: new Methods.MethodParameterCollection([
   		new Methods.Parameter({
   			name: "jurisdiction_id",
+        custom: false,
   			id: "jurisdiction_id",
   			type: "optional",
   			description: "This is currently optional on Chicago's Open311 endpoint.",
@@ -83,6 +85,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		}),
   		new Methods.Parameter({
   			name: "service_code",
+        custom: false,
   			id: "service_code",
   			type: "required",
   			description: "The service_code is specified in the main URL path rather than an added query string parameter.",
@@ -174,6 +177,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   	parameters: new Methods.MethodParameterCollection([
   		new Methods.Parameter({
   			name: "jurisdiction_id",
+        custom: false,
         id: "jurisdiction_id",
   			type: "optional",
   			description: "This is currently optional on Chicago's Open311 endpoint.",
@@ -181,6 +185,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		}),
   		new Methods.Parameter({
   			name: "service_request_id",
+        custom: false,
         id: "service_request_id",
   			type: "required",
   			description: "The id of the individual service request you want to look up. The service_request_id is specified in the main URL path rather than an added query string parameter.",
@@ -188,6 +193,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		}),
       new Methods.Parameter({
         name: "extensions",
+        custon: true,
         id: "extensions",
         type: "optional",
         description: "The Chicago Open311 endpoint provides supplemental details about Service Requests that are in addition to the ones described in the standard specification. These data are nested in the 'extended_attributes' field in the Service Request response. In order to retrieve the new supplemental details, add the query parameter “extensions=true” to any Open 311 api request.",
@@ -355,6 +361,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   	parameters: new Methods.MethodParameterCollection([
   		new Methods.Parameter({
   			name: "jurisdiction_id",
+        custom: false,
         id: "jurisdiction_id",
   			type: "optional",
   			description: "This is currently optional on Chicago's Open311 endpoint.",
@@ -362,6 +369,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		}),
   		new Methods.Parameter({
   			name: "service_request_id",
+        custom: false,
         id: "service_request_id",
   			type: "optional",
   			description: "To call multiple Service Requests at once, multiple service_request_id can be declared; comma delimited.",
@@ -369,6 +377,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		}),  		
   		new Methods.Parameter({
   			name: "service_code",
+        custom: false,
         id: "service_code_param",
   			type: "optional",
   			description: "Specify the service type by calling the unique ID(s) of the service_codes you wish to query. This defaults to all service codes when not declared; can be declared multiple times, comma delimited (no spaces)",
@@ -376,6 +385,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		}),
   		new Methods.Parameter({
   			name: "start_date",
+        custom: false,
         id: "start_date",
   			type: "optional",
   			description: "Earliest datetime to include in search. When provided with end_date, allows one to search for requests which have a requested_datetime that matches a given range. Must use w3 format, eg 2010-01-01T00:00:00Z.",
@@ -383,6 +393,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		}),
   		new Methods.Parameter({
   			name: "end_date",
+        custom: false,
         id: "end_date",
   			type: "optional",
   			description: "Latest datetime to include in search. When provided with start_date, allows one to search for requests which have a requested_datetime that matches a given range. Must use w3 format, eg 2010-01-01T00:00:00Z.",
@@ -390,6 +401,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		}),
   		new Methods.Parameter({
   			name: "status",
+        custom: false,
         id: "status",
   			type: "optional",
   			description: "Allows for search of requests which have a specific status. This defaults to all statuses; can be declared multiple times, comma delimited (no spaces); Options: open, closed.",
@@ -397,6 +409,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   		}),
       new Methods.Parameter({
         name: "extensions",
+        custom: true,
         id: "extensions",
         type: "optional",
         description: "The Chicago Open311 endpoint provides supplemental details about Service Requests that are in addition to the ones described in the standard specification. These data are nested in the 'extended_attributes' field in the Service Request response. In order to retrieve the new supplemental details, add the query parameter “extensions=true” to any Open 311 api request.",
@@ -404,6 +417,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
       }),
       new Methods.Parameter({
         name: "page_size",
+        custom: true,
         id: "page_size",
         type: "optional",
         description: "Controls the maximum amount of results a single call will return. The default value is 50. The maximum value is 500.",
@@ -411,6 +425,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
       }),      
       new Methods.Parameter({
         name: "page",
+        custom: true,
         id: "page",
         type: "optional",
         description: "For calls that logically include more records than the page size, the page parameter can be use to page through the results. Use in combination with page_size and with multiple calls to download all data in a logical set of records.",
@@ -418,6 +433,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
       }),
       new Methods.Parameter({
         name: "updated_before",
+        custom: true,
         id: "updated_before",
         type: "optional",
         description: "TBD. This field is experimental and documentation is still being compiled",
@@ -425,6 +441,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
       }),
       new Methods.Parameter({
         name: "updated_after",
+        custom: true,
         id: "updated_after",
         type: "optional",
         description: "TBD. This field is experimental and documentation is still being compiled",
@@ -432,6 +449,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
       }),
       new Methods.Parameter({
         name: "q",
+        custom: true,
         id: "q",
         type: "optional",
         description: "Query: TBD. This field is experimental and documentation is still being compiled",
