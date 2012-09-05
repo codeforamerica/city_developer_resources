@@ -5,157 +5,157 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
 
   // define service meta data methods:
   var getServiceList = new Methods.Method({
-  	name: "Service List",
-  	description: "Provide a list of acceptable 311 service request types and their associated service codes.",
-  	url: "services.:format",
-  	link: "service_list",
-  	requiresAuthentication: "No",
-  	responseFormats: "JSON, XML",
-  	httpMethods: "GET",
-  	responseObject: "Service List",
-  	endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/services",
-  	parameters: new Methods.MethodParameterCollection([
-  		new Methods.Parameter({
-  			name: "jurisdiction_id",
-  			custom: false,
-  			id: "jurisdiction_id",
-  			type: "optional",
-  			description: "This is currently optional on Chicago's Open311 endpoint.",
-  			example: "cityofchicago.org"
-  		})
-  	]),
-  	responseParameters: new Methods.MethodResponseParameterCollection([
-  		new Methods.ResponseParameter({
-  			name: "service_code",
-  			custom: false,
-  			description: "The unique identifier for the service request type"
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "service_name",
-  			custom: false,
-  			description: "The human readable name of the service request type"
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "description",
-  			custom: false,
-  			description: "A brief description of the service request type."
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "metadata",
-  			custom: false,
-  			description: "Determines whether there are additional form fields for this service type."
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "type",
-  			custom: false,
-  			description: "Explains how this deals with the Open311 service request ID dance."
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "keywords",
-  			custom: false,
-  			description: "A comma separated list of tags or keywords to help users identify the request type. " +
-  			             "This can provide synonyms of the service_name and group."
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "group",
-  			custom: false,
-  			description: "A category to group this service type within. This provides a way to group " +
-  			             "several service request types under one category such as 'sanitation'"
-  		})  		  	  			
-  	])
+    name: "Service List",
+    description: "Provide a list of acceptable 311 service request types and their associated service codes.",
+    url: "services.:format",
+    link: "service_list",
+    requiresAuthentication: "No",
+    responseFormats: "JSON, XML",
+    httpMethods: "GET",
+    responseObject: "Service List",
+    endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/services",
+    parameters: new Methods.MethodParameterCollection([
+      new Methods.Parameter({
+        name: "jurisdiction_id",
+        custom: false,
+        id: "jurisdiction_id",
+        type: "optional",
+        description: "This is currently optional on Chicago's Open311 endpoint.",
+        example: "cityofchicago.org"
+      })
+    ]),
+    responseParameters: new Methods.MethodResponseParameterCollection([
+      new Methods.ResponseParameter({
+        name: "service_code",
+        custom: false,
+        description: "The unique identifier for the service request type"
+      }),
+      new Methods.ResponseParameter({
+        name: "service_name",
+        custom: false,
+        description: "The human readable name of the service request type"
+      }),
+      new Methods.ResponseParameter({
+        name: "description",
+        custom: false,
+        description: "A brief description of the service request type."
+      }),
+      new Methods.ResponseParameter({
+        name: "metadata",
+        custom: false,
+        description: "Determines whether there are additional form fields for this service type."
+      }),
+      new Methods.ResponseParameter({
+        name: "type",
+        custom: false,
+        description: "Explains how this deals with the Open311 service request ID dance."
+      }),
+      new Methods.ResponseParameter({
+        name: "keywords",
+        custom: false,
+        description: "A comma separated list of tags or keywords to help users identify the request type. " +
+          "This can provide synonyms of the service_name and group."
+      }),
+      new Methods.ResponseParameter({
+        name: "group",
+        custom: false,
+        description: "A category to group this service type within. This provides a way to group " +
+          "several service request types under one category such as 'sanitation'"
+      })
+    ])
   });
   var getServiceDefinition = new Methods.Method({
-  	name: "Service Definition",
-  	description: "Define attributes associated with a service code.",
-  	url: "services/:service_code.:format",
-  	link: "service_definition",
-  	requiresAuthentication: "No",
-  	responseFormats: "JSON, XML",
-  	httpMethods: "GET",
-  	responseObject: "Service Definition",
-  	endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/services",
-  	parameters: new Methods.MethodParameterCollection([
-  		new Methods.Parameter({
-  			name: "jurisdiction_id",
+    name: "Service Definition",
+    description: "Define attributes associated with a service code.",
+    url: "services/:service_code.:format",
+    link: "service_definition",
+    requiresAuthentication: "No",
+    responseFormats: "JSON, XML",
+    httpMethods: "GET",
+    responseObject: "Service Definition",
+    endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/services",
+    parameters: new Methods.MethodParameterCollection([
+      new Methods.Parameter({
+        name: "jurisdiction_id",
         custom: false,
-  			id: "jurisdiction_id",
-  			type: "optional",
-  			description: "This is currently optional on Chicago's Open311 endpoint.",
-  			example: "cityofchicago.org"
-  		}),
-  		new Methods.Parameter({
-  			name: "service_code",
+        id: "jurisdiction_id",
+        type: "optional",
+        description: "This is currently optional on Chicago's Open311 endpoint.",
+        example: "cityofchicago.org"
+      }),
+      new Methods.Parameter({
+        name: "service_code",
         custom: false,
-  			id: "service_code",
-  			type: "required",
-  			description: "The service_code is specified in the main URL path rather than an added query string parameter.",
-  			example: "4fd3bd3de750846c530000b9"
-  		})  		
-  	]),
+        id: "service_code",
+        type: "required",
+        description: "The service_code is specified in the main URL path rather than an added query string parameter.",
+        example: "4fd3bd3de750846c530000b9"
+      })
+    ]),
     responseParameters: new Methods.MethodResponseParameterCollection([
-  		new Methods.ResponseParameter({
-  			name: "service_code",
-  			custom: false,
-  			description: "Returns the service_code associated with the definition, the same one submitted for this call."
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "variable",
-  			custom: false,
-  			description: "'true' denotes that user input is needed. 'false' means the attribute is only used to present information to the user within the description field."
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "code",
-  			custom: false,
-  			description: "A unique identifier for the attribute."
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "datatype",
-  			custom: false,
-  			description: "Denotes the type of field used for user input."
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "required",
-  			custom: false,
-  			description: "'true' means that the value is required to submit service request. 'false' means that the value not required."
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "datatype_description",
-  			custom: false,
-  			description: "A description of the datatype which helps the user provide their input."
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "order",
-  			custom: false,
-  			description: "The sort order that the attributes will be presented to the user. 1 is shown first in the list."
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "description",
-  			custom: false,
-  			description: "A description of the attribute field with instructions for the user to find and identify the requested information."
-  		}),
-  		new Methods.ResponseParameter({
-  			name: "key",
-  			custom: false,
-  			description: "The unique identifier associated with an option for singlevaluelist or multivaluelist. This is analogous to the value attribute in an html option tag."
-  		}),  		  		  		
-  		new Methods.ResponseParameter({
-  			name: "name",
-  			custom: false,
-  			description: "The human readable title of an option for singlevaluelist or multivaluelist. This is analogous to the innerhtml text node of an html option tag."
-  		})  		
-  	])	
+      new Methods.ResponseParameter({
+        name: "service_code",
+        custom: false,
+        description: "Returns the service_code associated with the definition, the same one submitted for this call."
+      }),
+      new Methods.ResponseParameter({
+        name: "variable",
+        custom: false,
+        description: "'true' denotes that user input is needed. 'false' means the attribute is only used to present information to the user within the description field."
+      }),
+      new Methods.ResponseParameter({
+        name: "code",
+        custom: false,
+        description: "A unique identifier for the attribute."
+      }),
+      new Methods.ResponseParameter({
+        name: "datatype",
+        custom: false,
+        description: "Denotes the type of field used for user input."
+      }),
+      new Methods.ResponseParameter({
+        name: "required",
+        custom: false,
+        description: "'true' means that the value is required to submit service request. 'false' means that the value not required."
+      }),
+      new Methods.ResponseParameter({
+        name: "datatype_description",
+        custom: false,
+        description: "A description of the datatype which helps the user provide their input."
+      }),
+      new Methods.ResponseParameter({
+        name: "order",
+        custom: false,
+        description: "The sort order that the attributes will be presented to the user. 1 is shown first in the list."
+      }),
+      new Methods.ResponseParameter({
+        name: "description",
+        custom: false,
+        description: "A description of the attribute field with instructions for the user to find and identify the requested information."
+      }),
+      new Methods.ResponseParameter({
+        name: "key",
+        custom: false,
+        description: "The unique identifier associated with an option for singlevaluelist or multivaluelist. This is analogous to the value attribute in an html option tag."
+      }),
+      new Methods.ResponseParameter({
+        name: "name",
+        custom: false,
+        description: "The human readable title of an option for singlevaluelist or multivaluelist. This is analogous to the innerhtml text node of an html option tag."
+      })
+    ])
   });
 
   // service meta data method collection
   var serviceMetaDataCollection = new Methods.MethodCollection(
-  	[getServiceList, getServiceDefinition]
+    [getServiceList, getServiceDefinition]
   );
 
   // define group for service meta data methods
   var serviceMetaMethodGroup = new Methods.MethodGroup({
-  	name: "Service Request Meta Data",
-  	description: "Methods that expose data related to how Service Requests will be exposed in the API.",
-  	methods: serviceMetaDataCollection
+    name: "Service Request Meta Data",
+    description: "Methods that expose data related to how Service Requests will be exposed in the API.",
+    methods: serviceMetaDataCollection
   });
 
   // add meta data methods to dict
@@ -166,31 +166,31 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
   // define service request methods:
   var getServiceRequest = new Methods.Method({
     name: "Service Request",
-  	description: "Query the current status of an individual request.",
-  	url: "requests/:service_request_id.:format",
-  	link: "service_request",
-  	requiresAuthentication: "No",
-  	responseFormats: "JSON, XML",
-  	httpMethods: "GET",
-  	responseObject: "Service Request",
+    description: "Query the current status of an individual request.",
+    url: "requests/:service_request_id.:format",
+    link: "service_request",
+    requiresAuthentication: "No",
+    responseFormats: "JSON, XML",
+    httpMethods: "GET",
+    responseObject: "Service Request",
     endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/requests",
-  	parameters: new Methods.MethodParameterCollection([
-  		new Methods.Parameter({
-  			name: "jurisdiction_id",
+    parameters: new Methods.MethodParameterCollection([
+      new Methods.Parameter({
+        name: "jurisdiction_id",
         custom: false,
         id: "jurisdiction_id",
-  			type: "optional",
-  			description: "This is currently optional on Chicago's Open311 endpoint.",
-  			example: "cityofchicago.org"
-  		}),
-  		new Methods.Parameter({
-  			name: "service_request_id",
+        type: "optional",
+        description: "This is currently optional on Chicago's Open311 endpoint.",
+        example: "cityofchicago.org"
+      }),
+      new Methods.Parameter({
+        name: "service_request_id",
         custom: false,
         id: "service_request_id",
-  			type: "required",
-  			description: "The id of the individual service request you want to look up. The service_request_id is specified in the main URL path rather than an added query string parameter.",
-  			example: "12-1245432"
-  		}),
+        type: "required",
+        description: "The id of the individual service request you want to look up. The service_request_id is specified in the main URL path rather than an added query string parameter.",
+        example: "12-1245432"
+      }),
       new Methods.Parameter({
         name: "extensions",
         custon: true,
@@ -198,8 +198,8 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
         type: "optional",
         description: "The Chicago Open311 endpoint provides supplemental details about Service Requests that are in addition to the ones described in the standard specification. These data are nested in the 'extended_attributes' field in the Service Request response. In order to retrieve the new supplemental details, add the query parameter “extensions=true” to any Open 311 api request.",
         example: "true"
-      })            
-  	]),
+      })
+    ]),
     responseParameters: new Methods.MethodResponseParameterCollection([
       new Methods.ResponseParameter({
         name: "service_request_id",
@@ -345,68 +345,68 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
         name: "notes.datetime",
         custom: true,
         description: "The date and time of the activity / action described by the note."
-      })                                                                                        
-    ])      	
+      })
+    ])
   });
   var getServiceRequests = new Methods.Method({
-  	name: "Service Requests",
-  	description: "Query the current status of multiple requests.",
-  	url: "requests.:format",
-  	link: "service_requests",
-  	requiresAuthentication: "No",
-  	responseFormats: "JSON, XML",
-  	httpMethods: "GET",
-  	responseObject: "Service Requests",
-  	endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/requests",
-  	parameters: new Methods.MethodParameterCollection([
-  		new Methods.Parameter({
-  			name: "jurisdiction_id",
+    name: "Service Requests",
+    description: "Query the current status of multiple requests. Because the Chicago endpoint may return service requests with no token and no service_reqeust_id in calls to GET service_requests while recently submitted SRs are still being processed by City systems, users of the GET service_requests method should ignore any service requests returned by the API until they have a service_request_id.",
+    url: "requests.:format",
+    link: "service_requests",
+    requiresAuthentication: "No",
+    responseFormats: "JSON, XML",
+    httpMethods: "GET",
+    responseObject: "Service Requests",
+    endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/requests",
+    parameters: new Methods.MethodParameterCollection([
+      new Methods.Parameter({
+        name: "jurisdiction_id",
         custom: false,
         id: "jurisdiction_id",
-  			type: "optional",
-  			description: "This is currently optional on Chicago's Open311 endpoint.",
-  			example: "cityofchicago.org"
-  		}),
-  		new Methods.Parameter({
-  			name: "service_request_id",
+        type: "optional",
+        description: "This is currently optional on Chicago's Open311 endpoint.",
+        example: "cityofchicago.org"
+      }),
+      new Methods.Parameter({
+        name: "service_request_id",
         custom: false,
         id: "service_request_id",
-  			type: "optional",
-  			description: "To call multiple Service Requests at once, multiple service_request_id can be declared; comma delimited.",
-  			example: "cityofchicago.org"
-  		}),  		
-  		new Methods.Parameter({
-  			name: "service_code",
+        type: "optional",
+        description: "To call multiple Service Requests at once, multiple service_request_id can be declared; comma delimited.",
+        example: "cityofchicago.org"
+      }),
+      new Methods.Parameter({
+        name: "service_code",
         custom: false,
         id: "service_code_param",
-  			type: "optional",
-  			description: "Specify the service type by calling the unique ID(s) of the service_codes you wish to query. This defaults to all service codes when not declared; can be declared multiple times, comma delimited (no spaces)",
-  			example: "cityofchicago.org"
-  		}),
-  		new Methods.Parameter({
-  			name: "start_date",
+        type: "optional",
+        description: "Specify the service type by calling the unique ID(s) of the service_codes you wish to query. This defaults to all service codes when not declared; can be declared multiple times, comma delimited (no spaces)",
+        example: "cityofchicago.org"
+      }),
+      new Methods.Parameter({
+        name: "start_date",
         custom: false,
         id: "start_date",
-  			type: "optional",
-  			description: "Earliest datetime to include in search. When provided with end_date, allows one to search for requests which have a requested_datetime that matches a given range. Must use w3 format, eg 2010-01-01T00:00:00Z.",
-  			example: "cityofchicago.org"
-  		}),
-  		new Methods.Parameter({
-  			name: "end_date",
+        type: "optional",
+        description: "Earliest datetime to include in search. When provided with end_date, allows one to search for requests which have a requested_datetime that matches a given range. Must use w3 format, eg 2010-01-01T00:00:00Z.",
+        example: "cityofchicago.org"
+      }),
+      new Methods.Parameter({
+        name: "end_date",
         custom: false,
         id: "end_date",
-  			type: "optional",
-  			description: "Latest datetime to include in search. When provided with start_date, allows one to search for requests which have a requested_datetime that matches a given range. Must use w3 format, eg 2010-01-01T00:00:00Z.",
-  			example: "cityofchicago.org"
-  		}),
-  		new Methods.Parameter({
-  			name: "status",
+        type: "optional",
+        description: "Latest datetime to include in search. When provided with start_date, allows one to search for requests which have a requested_datetime that matches a given range. Must use w3 format, eg 2010-01-01T00:00:00Z.",
+        example: "cityofchicago.org"
+      }),
+      new Methods.Parameter({
+        name: "status",
         custom: false,
         id: "status",
-  			type: "optional",
-  			description: "Allows for search of requests which have a specific status. This defaults to all statuses; can be declared multiple times, comma delimited (no spaces); Options: open, closed.",
-  			example: "cityofchicago.org"
-  		}),
+        type: "optional",
+        description: "Allows for search of requests which have a specific status. This defaults to all statuses; can be declared multiple times, comma delimited (no spaces); Options: open, closed.",
+        example: "cityofchicago.org"
+      }),
       new Methods.Parameter({
         name: "extensions",
         custom: true,
@@ -422,7 +422,7 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
         type: "optional",
         description: "Controls the maximum amount of results a single call will return. The default value is 50. The maximum value is 500.",
         example: "50"
-      }),      
+      }),
       new Methods.Parameter({
         name: "page",
         custom: true,
@@ -454,8 +454,8 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
         type: "optional",
         description: "Query: TBD. This field is experimental and documentation is still being compiled",
         example: "2012-08-30T17:28:09"
-      })                                          	 		  		 		  		
-  	]),
+      })
+    ]),
     responseParameters: new Methods.MethodResponseParameterCollection([
       new Methods.ResponseParameter({
         name: "service_request_id",
@@ -601,29 +601,171 @@ var bootstrapData = function(Methods, methodGroupCollection, methodsDict) {
         name: "notes.datetime",
         custom: true,
         description: "The date and time of the activity / action described by the note."
-      })                                
-  	])  	  	
-  });  
+      })
+    ])
+  });
+  var postServiceRequest = new Methods.Method({
+    name: "Post Service Request",
+    description: "Create a service request in the City's database. Once a service request has been processed by the City (this can take an undetermined amount of time), you should be able to call the GET service_request_id method (tokens/:token_id.:format) to get back the service_request_id for a SR. Therefore, it is nesseary to poll the GET service_request_id method until an SR id is returned. Because the Chicago endpoint may return service requests with no token and no service_reqeust_id in calls to GET service_requests while recently submitted SRs are still being processed by City systems, users of the GET service_requests method should ignore any service requests returned by the API until they have a service_request_id.",
+    url: "requests.:format",
+    link: "post_service_request",
+    requiresAuthentication: "Yes",
+    responseFormats: "JSON, XML",
+    httpMethods: "POST",
+    type: "POST",
+    responseObject: "Post Service Requests",
+    endpointBaseUrl: "http://311api.cityofchicago.org/open311/v2/requests",
+    parameters: new Methods.MethodParameterCollection([
+      new Methods.Parameter({
+        name: "jurisdiction_id",
+        custom: false,
+        id: "jurisdiction_id",
+        type: "optional",
+        description: "This is currently optional on Chicago's Open311 endpoint.",
+        example: "cityofchicago.org"
+      }),
+      new Methods.Parameter({
+        name: "service_code",
+        custom: false,
+        id: "service_code_param",
+        type: "required",
+        description: "This is obtained from GET Service List method.",
+        example: "12345"
+      }),
+      new Methods.Parameter({
+        name: "attribute",
+        custom: false,
+        id: "attribute",
+        type: "required",
+        description: "This takes the form of attribute[code]=value where multiple code/value pairs can be specified as well as multiple values for the same code in the case of a multivaluelist datatype (attribute[code1][]=value1&attribute[code1][]=value2&attribute[code1][]=value3) - see example. - This is only required if the service_code requires a service definition with required fields.",
+        example: "12345"
+      }),
+      new Methods.Parameter({
+        name: "lat",
+        custom: false,
+        id: "lat",
+        type: "required",
+        description: "lat & long both need to be sent even though they are sent as two separate parameters. lat & long are required.",
+        example: "-122.1"
+      }),
+      new Methods.Parameter({
+        name: "long",
+        custom: false,
+        id: "long",
+        type: "required",
+        description: "lat & long both need to be sent even though they are sent as two separate parameters.lat & long are required.",
+        example: "-122.1"
+      }),
+      new Methods.Parameter({
+        name: "address_string",
+        custom: false,
+        id: "address_string",
+        type: "required",
+        description: "This should be written from most specific to most general geographic unit, eg address number or cross streets, street name, neighborhood/district, city/town/village, county, postal code.",
+        example: "-122.1"
+      }),
+      new Methods.Parameter({
+        name: "address_id",
+        custom: false,
+        id: "address_id",
+        type: "optional",
+        description: "The internal address ID used by a jurisdiction's master address repository or other addressing system.",
+        example: "-122.1"
+      }),
+      new Methods.Parameter({
+        name: "email",
+        custom: false,
+        id: "email",
+        type: "optional",
+        description: "The email address of the person submitting the request.",
+        example: "-122.1"
+      }),
+      new Methods.Parameter({
+        name: "device_id",
+        custom: false,
+        id: "device_id",
+        type: "optional",
+        description: "The unique device ID of the device submitting the request. This is usually only used for mobile devices.",
+        example: "-122.1"
+      }),
+      new Methods.Parameter({
+        name: "account_id",
+        custom: false,
+        id: "account_id",
+        type: "optional",
+        description: "The unique ID for the user account of the person submitting the request.",
+        example: "-122.1"
+      }),
+      new Methods.Parameter({
+        name: "first_name",
+        custom: false,
+        id: "first_name",
+        type: "optional",
+        description: "The given name of the person submitting the request.",
+        example: "-122.1"
+      }),
+      new Methods.Parameter({
+        name: "last_name",
+        custom: false,
+        id: "last_name",
+        type: "optional",
+        description: "The family name of the person submitting the request.",
+        example: "-122.1"
+      }),
+      new Methods.Parameter({
+        name: "phone",
+        custom: false,
+        id: "phone",
+        type: "optional",
+        description: "The phone number of the person submitting the request.",
+        example: "-122.1"
+      }),
+      new Methods.Parameter({
+        name: "description",
+        custom: false,
+        id: "description",
+        type: "optional",
+        description: "A full description of the request or report being submitted.",
+        example: "-122.1"
+      }),
+      new Methods.Parameter({
+        name: "media_url",
+        custom: false,
+        id: "media_url",
+        type: "optional",
+        description: "A URL to media associated with the request, eg an image.",
+        example: "-122.1"
+      })
+    ]),
+    responseParameters: new Methods.MethodResponseParameterCollection([
+      new Methods.ResponseParameter({
+        name: "token",
+        custom: false,
+        description: "If returned, use this to call GET service_request_id from a token to discover what the service_request_id is after it is created by the City system."
+      })
+    ])
+  });
 
   // define service request method collection
   var serviceRequestCollection = new Methods.MethodCollection(
-  	[getServiceRequest, getServiceRequests]
+    [getServiceRequest, getServiceRequests, postServiceRequest]
   );
 
   // define group for service request methods
   var serviceRequestMethodGroup = new Methods.MethodGroup({
-  	name: "Service Requests",
-  	description: "Methods that allow for reading and writing of Service Requests to the City database.",
-  	methods: serviceRequestCollection
+    name: "Service Requests",
+    description: "Methods that allow for reading and writing of Service Requests to the City database.",
+    methods: serviceRequestCollection
   });
 
   // add service request methods to dict
   methodsDict["service_request"] = getServiceRequest;
   methodsDict["service_requests"] = getServiceRequests;
+  methodsDict["post_service_request"] = postServiceRequest;
 
   methodGroupCollection = new Methods.MethodGroupCollection(
-  	[serviceMetaMethodGroup, serviceRequestMethodGroup]
-  );  
+    [serviceMetaMethodGroup, serviceRequestMethodGroup]
+  );
 
   return {dict: methodsDict, group: methodGroupCollection};
 }

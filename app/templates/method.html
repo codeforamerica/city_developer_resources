@@ -13,6 +13,7 @@
 		</div>
 		<div id="response-params" class="expanda"></div>
 	</div><hr />
+	<% if (model.get("type") !== "POST") { %>
 	<div class="expand-it">
 		<div class="section-title expand-click">
 			<strong>Try it:</strong>
@@ -20,7 +21,8 @@
 		</div>
 		<div id="io-form" class="expanda"></div>
 	</div>	
-  </div>
+	<% } %>
+  </div>  
   <div class="span4">
   	<div class="well bs-docs-sidenav affix">
   		<table class="table">
@@ -56,6 +58,7 @@
 		    		<p><strong><%= model.get("httpMethods") %></strong></p> 
 		    	</td>  		
 	  	    </tr>
+	  	    <% if (model.get("type") !== "POST") { %>
 	  	    <tr>
 	  	    	<td>
 		    		<p>JSONP</p>
@@ -63,7 +66,8 @@
 		    	<td>
 		    		<p><strong>callback=?</strong></p> 
 		    	</td>  		
-	  	    </tr>	  	    
+	  	    </tr>	
+	  	    <% } %>  	    
 	  	    <!-- removing for 1st release, will re-enable when it's more clear what content should go here -->
 <!-- 	  	    <tr>
 	  	    	<td>
