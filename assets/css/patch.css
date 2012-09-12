@@ -51,7 +51,11 @@ table .light {
 	width: 95%;
 }
 
-.authentication p {
+.authentication {
+	margin-bottom: 50px;
+}
+
+.authentication p.caption {
 	font-weight: lighter;
 }
 
