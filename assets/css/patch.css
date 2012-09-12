@@ -20,7 +20,7 @@ table .light {
 .parameters .left-col {
 	width: 30%;
 }
-.parameters .right-col {	
+.parameters .right-col {
 	width: 70%;
 }
 
@@ -41,7 +41,7 @@ table .light {
 }
 
 .endpoint-url {
-	font-size: 10px;	
+	font-size: 10px;
 }
 
 .try-it-params .left-col {
@@ -49,4 +49,16 @@ table .light {
 }
 .try-it-params .right-col {
 	width: 95%;
+}
+
+.authentication p {
+	font-weight: lighter;
+}
+
+.authentication p a {
+	font-weight: normal;
+}
+
+.footer {
+	margin-top: 50px;
 }
