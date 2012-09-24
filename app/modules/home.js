@@ -52,6 +52,12 @@ function(app) {
     }
   });
 
+  Home.Views.Tos = Backbone.View.extend({
+    template: "tos",
+
+    keep: true
+  });
+
   // Default view; used when navigation makes no sense.
   Home.Views.Default = Backbone.View.extend({
     template: "default"

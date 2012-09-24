@@ -23,6 +23,7 @@ function(app, Methods, Home) {
       "": "docs",
       "docs": "docs",
       "docs/api": "api",
+      "docs/api/tos": "tos",
       "docs/api/:method_name": "methodName",
       "docs/api/:method_name/response": "responseObject",
       "*path": "unknown"
@@ -122,6 +123,15 @@ function(app, Methods, Home) {
         //                 "titleTo": name}]
         //     })
         //   })
+      }).render();
+    },
+
+    tos: function() {
+      // by default, show the Home Main view
+      app.layout.setViews({
+        ".header": new Home.Views.Header(),
+        ".content": new Home.Views.Tos(),
+        ".footer": new Home.Views.Footer()
       }).render();
     },
 
