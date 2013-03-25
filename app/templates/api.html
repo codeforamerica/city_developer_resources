@@ -2,6 +2,53 @@
 	<h1>Open311 API Documentation</h1>
 </div>
 <div class="row span12">
+  <div class="authentication">
+    <h3>Authentication</h3>
+    <p class="caption">
+      You may need an API Key in order to call some endpoints in Chicago's
+      Open311 system. This is indicated in the documentation by a field
+      labeled "<strong>Requires API Key?</strong>".
+    </p>
+
+    <h4>Testing</h4>
+    <p>
+      The City of Chicago has a separate environment and URL for testing
+      developer applications before connecting them to the Live Open311
+      system. The API key developers use in Test will be different than
+      the one used in production. The standard developer workflow would
+      work like this:
+    </p>
+
+    <ol>
+      <li>Developer requests an API key from the Test Open311 system</li>
+      <li>Using the Test API key, developer codes and tests their app
+        against the Test environment</li>
+      <li>Developer requests an API key from the Live Open311 system</li>
+      <li>Developer's application is deployed/released using Live system
+        API key and is coded against the Live environment</li>
+    </ol>
+
+    <h4>Requesting an API key</h4>
+    <p><strong>Test</strong> <a href="http://test311api.cityofchicago.org/open311/v2/apps/new">
+        http://test311api.cityofchicago.org/open311/v2/apps/new</a></p>
+
+    <p>
+      Visit the above URL to request an API key from the test Open311 system.
+      Your request will be automatically provisioned so you can get started
+      immediately developing against the test Open311 system.
+    </p>
+
+    <p><strong>Production</strong> <a href="http://311api.cityofchicago.org/open311/v2/apps/new">
+        http://311api.cityofchicago.org/open311/v2/apps/new</a></p>
+
+    <p>
+      Visit the above URL to request an API key from the test Open311 system.
+      The API Key application you submit will need to be reviewed and approved
+      by City of Chicago Staff to ensure compliance with the 
+      <a href="/docs/api/tos">Terms of Service</a>.
+    </p>
+  </div>
+
 	<div id="groups">
 		<!-- methodgroup html injected here-->
 	</div>

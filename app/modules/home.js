@@ -29,7 +29,13 @@ function(app) {
     template: "_header",
 
     keep: true
-  });  
+  });
+
+  Home.Views.Footer = Backbone.View.extend({
+    template: "_footer",
+
+    keep: true
+  });
 
   Home.BreadcrumbModel = Backbone.Model.extend({});
 
@@ -40,11 +46,17 @@ function(app) {
     keep: true,
 
     serialize: function() {
-      return { 
+      return {
         crumbs: this.model.get("crumbs")
       };
-    }    
-  });  
+    }
+  });
+
+  Home.Views.Tos = Backbone.View.extend({
+    template: "tos",
+
+    keep: true
+  });
 
   // Default view; used when navigation makes no sense.
   Home.Views.Default = Backbone.View.extend({
